@@ -1,13 +1,16 @@
-from pydantic import BaseModel 
-from typing import Optional
+from pydantic import BaseModel, ConfigDict
+from typing import Optional 
 
-class STaskAdd(BaseModel):
+class TaskAddSchema(BaseModel):
     name: str
     description: Optional[str] = None
 
-class STask(STaskAdd):
+
+class TaskSchema(TaskAddSchema):
     id: int
 
-class STaskId(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+class TasckIdSchema(BaseModel):
     ok: bool = True
     task_id: int
